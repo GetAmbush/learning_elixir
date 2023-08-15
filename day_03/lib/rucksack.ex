@@ -12,13 +12,9 @@ defmodule Rucksack do
     first_mapset = rucksack.first |> String.graphemes() |> MapSet.new()
     second_mapset = rucksack.second |> String.graphemes() |> MapSet.new()
 
-    first_mapset
-    |> MapSet.intersection(second_mapset)
-    |> Enum.to_list()
-    |> Enum.at(0)
+    ItemSet.repeated_item([first_mapset, second_mapset])
   end
 
-  def items(%__MODULE__{} = rucksack) do
-    "#{rucksack.first}#{rucksack.second}"
-  end
+  def items(%__MODULE__{} = rucksack),
+    do: "#{rucksack.first}#{rucksack.second}"
 end

@@ -10,14 +10,10 @@ defmodule ElfGroup do
   end
 
   def badge(%ElfGroup{} = elf_group) do
-    first_mapset = Rucksack.items(elf_group.rucksack1) |> String.graphemes() |> MapSet.new()
-    second_mapset = Rucksack.items(elf_group.rucksack2) |> String.graphemes() |> MapSet.new()
-    third_mapset = Rucksack.items(elf_group.rucksack3) |> String.graphemes() |> MapSet.new()
+    first_mapset = elf_group.rucksack1 |> Rucksack.items() |> String.graphemes() |> MapSet.new()
+    second_mapset = elf_group.rucksack2 |> Rucksack.items() |> String.graphemes() |> MapSet.new()
+    third_mapset = elf_group.rucksack3 |> Rucksack.items() |> String.graphemes() |> MapSet.new()
 
-    first_mapset
-    |> MapSet.intersection(second_mapset)
-    |> MapSet.intersection(third_mapset)
-    |> Enum.to_list()
-    |> Enum.at(0)
+    ItemSet.repeated_item([first_mapset, second_mapset, third_mapset])
   end
 end
