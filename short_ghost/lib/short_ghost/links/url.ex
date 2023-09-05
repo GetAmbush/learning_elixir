@@ -9,10 +9,12 @@ defmodule ShortGhost.Links.Url do
     timestamps()
   end
 
-  @doc false
-  def changeset(url, attrs) do
+  def changeset(%__MODULE__{} = url, changes) do
     url
-    |> cast(attrs, [:original_url, :short_url])
+    |> cast(changes, [:original_url, :short_url])
+    |> update_change(:orignal_url, &String.downcase/1)
     |> validate_required([:original_url, :short_url])
+    |> validate_format(:original_url, ~r/^http/)
+    |> unique_constraint(:short_url)
   end
 end

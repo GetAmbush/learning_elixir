@@ -13,8 +13,9 @@ defmodule ShortGhostWeb.UrlController do
   end
 
   def create(conn, params) do
-    {:ok, %Url{}} = Links.create_url(params)
+    dbg(params)
 
-    resp(conn, 301, "created")
+    {:ok, %Url{}} = Links.create_url(params)
+    resp(conn, 201, "created")
   end
 end

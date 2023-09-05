@@ -8,5 +8,7 @@ defmodule ShortGhost.Repo.Migrations.CreateUrls do
 
       timestamps()
     end
+
+    create unique_index(:urls, :short_url)
   end
 end
