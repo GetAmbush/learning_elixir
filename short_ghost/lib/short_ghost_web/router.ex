@@ -8,7 +8,7 @@ defmodule ShortGhostWeb.Router do
   scope "/api", ShortGhostWeb do
     pipe_through :api
 
-    get "/urls/:id", UrlController, :show
+    get "/urls/:short_url", UrlController, :show
     post "/urls", UrlController, :create
   end
 

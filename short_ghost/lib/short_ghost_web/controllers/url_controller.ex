@@ -5,7 +5,7 @@ defmodule ShortGhostWeb.UrlController do
   alias ShortGhost.Links.Url
 
   def show(conn, params) do
-    {:ok, %Url{} = url} = Links.fetch_url(params["id"])
+    {:ok, %Url{} = url} = Links.fetch_url(params["short_url"])
 
     conn
     |> put_resp_header("Location", url.original_url)
