@@ -27,6 +27,5 @@ defmodule ShortGhost.Links do
     1..@short_url_length
     |> Enum.map(fn _ -> Enum.random(@chars) end)
     |> Enum.join("")
-    |> String.to_atom()
   end
 end

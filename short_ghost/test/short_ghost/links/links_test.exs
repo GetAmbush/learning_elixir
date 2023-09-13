@@ -52,7 +52,7 @@ defmodule ShortGhost.LinksTest do
 
     test "only generates characters that we expect" do
       expected_chars =
-        String.split("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "")
+        String.graphemes("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
       Links.short_url()
       |> String.graphemes()
