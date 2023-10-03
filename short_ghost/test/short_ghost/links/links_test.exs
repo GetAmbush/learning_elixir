@@ -13,6 +13,13 @@ defmodule ShortGhost.LinksTest do
       assert url.original_url == @create_args.original_url
     end
 
+    test "creates a url with string params" do
+      assert {:ok, %Url{} = url} =
+               Links.create_url(%{"original_url" => "https://github.com/GetAmbush"})
+
+      assert url.original_url == @create_args.original_url
+    end
+
     test "creates a url fails when we have the same original url multiple times" do
       repeated_original_url = "https://github.com/GetAmbush/learning_elixir"
       create_args = %{original_url: repeated_original_url}
@@ -42,21 +49,6 @@ defmodule ShortGhost.LinksTest do
 
     test "errors when url doesn't exist" do
       assert {:error, :url_does_not_exist} == Links.fetch_url("some_short_url")
-    end
-  end
-
-  describe "short_url/0" do
-    test "generates a url of len 6" do
-      assert String.length(Links.short_url()) == 6
-    end
-
-    test "only generates characters that we expect" do
-      expected_chars =
-        String.graphemes("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-      Links.short_url()
-      |> String.graphemes()
-      |> Enum.each(fn char -> assert char in expected_chars end)
     end
   end
 end

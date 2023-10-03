@@ -12,20 +12,9 @@ defmodule ShortGhost.Links do
     end
   end
 
-  def create_url(params, short_url_provider \\ &__MODULE__.short_url/0) do
-    params = Map.put(params, :short_url, short_url_provider.())
-
+  def create_url(params, short_url_provider \\ &Url.generate_short_url/0) do
     %Url{}
-    |> Url.changeset(params)
+    |> Url.create_changeset(params, short_url_provider)
     |> Repo.insert()
-  end
-
-  @chars String.graphemes("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-  @short_url_length 6
-
-  def short_url() do
-    1..@short_url_length
-    |> Enum.map(fn _ -> Enum.random(@chars) end)
-    |> Enum.join("")
   end
 end
